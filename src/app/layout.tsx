@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/UI/header";
+import Header from "@/components/UI/layout/header";
 import Providers from "@/providers/Providers";
 import { siteConfig } from "@/config/site.config";
 import { layoutConfig } from "@/config/layout.config";
+import Title from "@/components/UI/layout/title";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,8 @@ export default function RootLayout({
               <main
                 className={`flex flex-col max-w-[1024px] mx-auto px-[24px] justify-start items-center`}
               >
+                <Title />
+
                 {children}
               </main>
             </div>
