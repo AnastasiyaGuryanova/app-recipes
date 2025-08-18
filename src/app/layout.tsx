@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "./components/ui/header";
+import Header from "@/components/UI/header";
 import HeroProviderWrapper from "@/providers/HeroProviderWrapper";
+import { siteConfig } from "@/config/site.config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Татарская кухня",
-  description: "Рецепты татарской кухни",
+  title: siteConfig.title,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({
