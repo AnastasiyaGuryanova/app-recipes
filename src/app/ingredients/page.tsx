@@ -1,7 +1,9 @@
+import IngredientForm from "@/forms/ingredient.form";
+
 const IngredientsPage = () => {
   return (
-    <div>
-      <h1>Ингридиенты</h1>
+    <div style={{ height: "fit-content" }}>
+      <IngredientForm />
     </div>
   );
 };
