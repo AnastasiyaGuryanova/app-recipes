@@ -17,6 +17,8 @@
     "@heroui/react": "2.8.2",
     "@prisma/extension-accelerate": "^2.0.2",
     "bcryptjs": "^3.0.2",
+    "dompurify": "^3.2.6",
+    "isomorphic-dompurify": "^2.26.0",
     "next": "15.4.6",
     "next-auth": "^5.0.0-beta.29",
     "react": "19.1.0",
