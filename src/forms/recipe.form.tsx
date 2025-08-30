@@ -20,7 +20,7 @@ interface IIngredientField {
 const initialState = {
   name: "",
   description: "",
-  imageUrl: ""
+  imageUrl: "",
 };
 
 const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
@@ -29,7 +29,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
   const [formData, setFormData] = useState({
     name: initialRecipe?.name || initialState.name,
     description: initialRecipe?.description || initialState.description,
-    imageUrl: initialRecipe?.imageUrl || initialState.imageUrl
+    imageUrl: initialRecipe?.imageUrl || initialState.imageUrl,
   });
 
   const [ingredientFields, setIngredientFields] = useState<IIngredientField[]>(
@@ -37,7 +37,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
       ? initialRecipe.ingredients.map((ing, index) => ({
           id: index,
           ingredientId: ing.ingredientId,
-          quantity: ing.quantity
+          quantity: ing.quantity,
         }))
       : [{ id: 0, ingredientId: "", quantity: null }]
   );
@@ -52,7 +52,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
     if (ingredientFields.length < 10) {
       setIngredientFields([
         ...ingredientFields,
-        { id: ingredientFields.length, ingredientId: "", quantity: null }
+        { id: ingredientFields.length, ingredientId: "", quantity: null },
       ]);
     }
   };
@@ -103,7 +103,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
         value={formData.name}
         classNames={{
           inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none"
+          input: "text-sm focus:outline-none",
         }}
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         validate={(value) => (!value ? "Название обязательно" : null)}
@@ -116,7 +116,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
         value={formData.description}
         classNames={{
           inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none"
+          input: "text-sm focus:outline-none",
         }}
         onChange={(e) =>
           setFormData({ ...formData, description: e.target.value })
@@ -129,7 +129,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
         value={formData.imageUrl}
         classNames={{
           inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none"
+          input: "text-sm focus:outline-none",
         }}
         onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
       />
@@ -141,12 +141,13 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
               isRequired
               name={`ingredient_${index}`}
               placeholder="Выберите ингредиент"
+              aria-label={`Ингредиент ${index + 1}`}
               selectedKeys={field.ingredientId ? [field.ingredientId] : []}
               classNames={{
                 trigger: "bg-default-100 w-full",
                 innerWrapper: "text-sm",
                 value: "truncate",
-                selectorIcon: "text-black"
+                selectorIcon: "text-black",
               }}
               onChange={(e) =>
                 handleIngredientChange(field.id, "ingredientId", e.target.value)
@@ -166,7 +167,7 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
               value={field.quantity !== null ? field.quantity.toString() : ""}
               classNames={{
                 inputWrapper: "bg-default-100 w-full",
-                input: "text-sm focus:outline-none"
+                input: "text-sm focus:outline-none",
               }}
               className="w-[100px]"
               onChange={(e) =>
