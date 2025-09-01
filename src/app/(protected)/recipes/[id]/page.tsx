@@ -30,9 +30,11 @@ const EditRecipePage = () => {
   if (recipe) {
     return (
       <div className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-4">
-          Редактировать рецепт: {recipe.name}
-        </h1>
+        <div className="w-[450px]">
+          <h1 className="text-3xl font-bold mb-4 break-words">
+            Редактировать рецепт: {recipe.name}
+          </h1>
+        </div>
         <RecipeForm initialRecipe={recipe} />
       </div>
     );
