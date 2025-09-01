@@ -135,66 +135,76 @@ const RecipeForm = ({ initialRecipe }: RecipeFormProps) => {
       />
 
       <div className="space-y-2 w-full">
-        {ingredientFields.map((field, index) => (
-          <div key={field.id} className="flex gap-2 items-center">
-            <Select
-              isRequired
-              name={`ingredient_${index}`}
-              placeholder="Выберите ингредиент"
-              aria-label={`Ингредиент ${index + 1}`}
-              selectedKeys={field.ingredientId ? [field.ingredientId] : []}
-              classNames={{
-                trigger: "bg-default-100 w-full",
-                innerWrapper: "text-sm",
-                value: "truncate",
-                selectorIcon: "text-black",
-              }}
-              onChange={(e) =>
-                handleIngredientChange(field.id, "ingredientId", e.target.value)
-              }
-            >
-              {ingredients.map((ingredient) => (
-                <SelectItem key={ingredient.id} className="text-black">
-                  {ingredient.name}
-                </SelectItem>
-              ))}
-            </Select>
-            <Input
-              isRequired
-              name={`quantity_${index}`}
-              placeholder="Количество"
-              type="number"
-              value={field.quantity !== null ? field.quantity.toString() : ""}
-              classNames={{
-                inputWrapper: "bg-default-100 w-full",
-                input: "text-sm focus:outline-none",
-              }}
-              className="w-[100px]"
-              onChange={(e) =>
-                handleIngredientChange(
-                  field.id,
-                  "quantity",
-                  e.target.value ? parseFloat(e.target.value) : null
-                )
-              }
-              validate={(value) =>
-                !value || parseFloat(value) <= 0
-                  ? "Количество должно быть больше 0"
-                  : null
-              }
-            />
-            {ingredientFields.length > 1 && (
-              <Button
-                color="danger"
-                variant="light"
-                onPress={() => handleRemoveIngredientField(field.id)}
-                className="w-[50px]"
+        {ingredientFields.map((field, index) => {
+          const isValidIngredient = ingredients.some(
+            (ing) => ing.id === field.ingredientId
+          );
+
+          return (
+            <div key={field.id} className="flex gap-2 items-center">
+              <Select
+                isRequired
+                name={`ingredient_${index}`}
+                placeholder="Выберите ингредиент"
+                aria-label={`Ингредиент ${index + 1}`}
+                selectedKeys={isValidIngredient ? [field.ingredientId] : []}
+                classNames={{
+                  trigger: "bg-default-100 w-full",
+                  innerWrapper: "text-sm",
+                  value: "truncate",
+                  selectorIcon: "text-black",
+                }}
+                onChange={(e) =>
+                  handleIngredientChange(
+                    field.id,
+                    "ingredientId",
+                    e.target.value
+                  )
+                }
               >
-                -
-              </Button>
-            )}
-          </div>
-        ))}
+                {ingredients.map((ingredient) => (
+                  <SelectItem key={ingredient.id} className="text-black">
+                    {ingredient.name}
+                  </SelectItem>
+                ))}
+              </Select>
+              <Input
+                isRequired
+                name={`quantity_${index}`}
+                placeholder="Количество"
+                type="number"
+                value={field.quantity !== null ? field.quantity.toString() : ""}
+                classNames={{
+                  inputWrapper: "bg-default-100 w-full",
+                  input: "text-sm focus:outline-none",
+                }}
+                className="w-[100px]"
+                onChange={(e) =>
+                  handleIngredientChange(
+                    field.id,
+                    "quantity",
+                    e.target.value ? parseFloat(e.target.value) : null
+                  )
+                }
+                validate={(value) =>
+                  !value || parseFloat(value) <= 0
+                    ? "Количество должно быть больше 0"
+                    : null
+                }
+              />
+              {ingredientFields.length > 1 && (
+                <Button
+                  color="danger"
+                  variant="light"
+                  onPress={() => handleRemoveIngredientField(field.id)}
+                  className="w-[50px]"
+                >
+                  -
+                </Button>
+              )}
+            </div>
+          );
+        })}
 
         {ingredientFields.length < 10 && (
           <Button

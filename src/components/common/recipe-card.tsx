@@ -55,7 +55,12 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
       </div>
 
       <CardHeader className="flex justify-between items-center text-black">
-        <h2 className="text-xl font-bold">{recipe.name}</h2>
+        <h2
+          className="text-xl font-bold truncate max-w-full"
+          title={recipe.name}
+        >
+          {recipe.name}
+        </h2>
       </CardHeader>
 
       <CardBody className="flex-1 text-black">
